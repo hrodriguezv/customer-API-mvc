@@ -1,1 +1,43 @@
+spring:
+  #Enable the h2 console
+  h2:
+    console:
+      enabled: true
 
+  #Setting the database datasource 
+  datasource:
+    url: jdbc:h2:mem:customer
+    username: consultec
+    password: 12consultec34
+    driverClassName: org.h2.Driver
+
+  #Setting the Dialect for h2
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true 
+
+#Enable logging
+logging:
+  level:
+    ROOT: ERROR
+    org:
+      springframework: ERROR
+    com:
+      consultecti: DEBUG
+  pattern:
+    console: "%5p||Date: %d{yyyy-MM-dd HH:mm:ss}||Class: %c||Line: %L||%m%n"
+    
+authentication:
+  username: consultecti
+  password: 09challenge19
+  role: ADMIN
+
+apidoc:
+  ID: Customer's identifier
+  NAME: Customer First Name
+  LASTNAME: Customer Last Name
+  USERNAME: Customer username
+  PASSWORD: Customer passward
+  EMAIL: Customer email address
+  ADDRESS: Customer address
+  STASTUS: Customer status
