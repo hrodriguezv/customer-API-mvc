@@ -4,6 +4,7 @@
 package com.consultecti.customer.api.model.domain;
 
 import java.io.Serializable;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
@@ -11,13 +12,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author amelendez
@@ -56,11 +56,10 @@ public class Customer implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private CustomerStatus status;
 
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "date_created", nullable = false)
-	private ZonedDateTime dateCreated = ZonedDateTime.now();
+	private ZonedDateTime dateCreated = ZonedDateTime.now(ZoneId.of("UTC-4"));
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn
 	private Distributor distributor;
 

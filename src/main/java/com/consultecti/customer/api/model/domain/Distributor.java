@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -49,7 +48,7 @@ public class Distributor implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private ZonedDateTime dateCreated = ZonedDateTime.now();
 
-	@OneToMany(mappedBy = "distributor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "distributor", fetch = FetchType.LAZY)
 	private List<Customer> customers = new ArrayList<>();
 
 	/**

@@ -66,7 +66,7 @@ public class CustomerService implements ICustomerService {
 		try {
 			return this.customerRepository.findById(id).get();
 		} catch (Exception e) {
-			log.error("Error retrieved  a Customer by the id {}", id, e);
+			log.error("Error retrieved a Customer by the id {}", id, e);
 			return null;
 		}
 	}
