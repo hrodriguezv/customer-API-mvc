@@ -16,7 +16,7 @@ import com.consultecti.customer.api.service.IDistributorService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-class CustomerApiApplicationTests {
+public class CustomerApiApplicationTests {
 
 	@Autowired
 	private IDistributorService distributorService;
@@ -25,7 +25,7 @@ class CustomerApiApplicationTests {
 	private ICustomerService customerService;
 	
 	@Test
-	void test() {
+	public void test() {
 
 		//CREATE A Distributor
 		Distributor distributor = this.distributorService.add(new 
