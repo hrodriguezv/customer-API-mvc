@@ -21,4 +21,11 @@ public final class RouterUtil {
 	public static final String CUSTOMERS_BY_STATUS = "by/status/{status}";
 	
 	public final static String PRODUCES = "application/json; charset=utf-8";
+	
+	/**
+	 * Description for all response httpStatus
+	 */
+	public static final String HTTP_200 = "Is returned when the requested process is executed correctly.";
+	public static final String HTTP_400 = "Is returned when the requested was not executed correctly or the request does not complete with the validation rules.";
+	public static final String HTTP_500 = "Is returned when an internal system error occurs and the request could not be processed.";
 }

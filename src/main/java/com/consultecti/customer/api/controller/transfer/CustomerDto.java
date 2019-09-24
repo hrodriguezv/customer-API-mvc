@@ -6,8 +6,15 @@ package com.consultecti.customer.api.controller.transfer;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.consultecti.customer.api.model.domain.CustomerStatus;
+import com.consultecti.customer.api.util.ApiDocUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author amelendez
@@ -20,13 +27,35 @@ public class CustomerDto implements Serializable {
 	 */
 	private static final long serialVersionUID = -809040863811476221L;
 
-	private Long id;
+	@ApiModelProperty(notes = "${apidoc.ID}", required = true, allowEmptyValue = false, example = "1")
+	@NotNull 
+	Long id;
+
+	@ApiModelProperty(notes = "${apidoc.NAME}", required = true, allowEmptyValue = false, example = ApiDocUtil.NAME)
+	@NotBlank
 	private String name;
+	
+	@ApiModelProperty(notes = "${apidoc.LASTNAME}", required = true, allowEmptyValue = false, example = ApiDocUtil.LASTNAME)
+	@NotBlank
 	private String lastName;
+	
+	@ApiModelProperty(notes = "${apidoc.USERNAME}", required = true, allowEmptyValue = false, example = ApiDocUtil.USERNAME)
+	@NotBlank
 	private String username;
+
+	@ApiModelProperty(notes = "${apidoc.EMAIL}", required = true, allowEmptyValue = false, example = ApiDocUtil.EMAIL)
+	@NotBlank
+	@Email
 	private String email;
+	
+	@ApiModelProperty(notes = "${apidoc.ADDRESS}", required = true, allowEmptyValue = false, example = ApiDocUtil.ADDRESS)
+	@NotBlank
+	
 	private String address;
+	@ApiModelProperty(notes = "${apidoc.STATUS}", required = true, allowEmptyValue = false, example = ApiDocUtil.STASTUS)
 	private CustomerStatus status;
+	
+	@ApiModelProperty(notes = "Customer date", required = true, allowEmptyValue = false, example = "24/09/2019")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
 	private ZonedDateTime dateCreated;
 

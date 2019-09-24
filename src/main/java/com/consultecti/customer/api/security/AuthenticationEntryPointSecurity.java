@@ -55,7 +55,7 @@ public class AuthenticationEntryPointSecurity extends BasicAuthenticationEntryPo
 	 * BasicAuthenticationEntryPoint#afterPropertiesSet()
 	 */
 	@Override
-	public void afterPropertiesSet() {
+	public void afterPropertiesSet() throws Exception {
 		setRealmName(SecurityConfigurationSecurity.REALM);
 		super.afterPropertiesSet();
 	}

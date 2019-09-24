@@ -31,9 +31,10 @@ public class SecurityConfigurationSecurity extends WebSecurityConfigurerAdapter 
 	@Autowired
 	private AuthenticationConfig authConfig;
 	
-	private static final String MATCHERS = "/**";
+	private static final String MATCHERS = "/api/**";
 	
-	private static final String[] AUTH_WHITELIST = {"index.html"};
+	private static final String[] AUTH_WHITELIST = {"/swagger-ui.html", "/swagger-resources/**", "/v2/api-docs",
+			"/webjars/**", "/swagger.json"};
 	
 	@Autowired
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
@@ -54,6 +55,7 @@ public class SecurityConfigurationSecurity extends WebSecurityConfigurerAdapter 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+			.antMatchers(AUTH_WHITELIST).permitAll()
 			.antMatchers(MATCHERS)
 			.hasRole(authConfig.getRole())
 			.and()

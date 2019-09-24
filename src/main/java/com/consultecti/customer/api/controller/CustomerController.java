@@ -33,10 +33,19 @@ import com.consultecti.customer.api.service.IDistributorService;
 import com.consultecti.customer.api.util.RouterUtil;
 import com.consultecti.customer.api.util.ValidatorUtil;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 /**
  * @author amelendez
  * @since Sep 24, 2019
  */
+@ApiResponses(value = {
+		@ApiResponse(code = 200, message = RouterUtil.HTTP_200),			
+		@ApiResponse(code = 400, message = RouterUtil.HTTP_400),
+		@ApiResponse(code = 500, message = RouterUtil.HTTP_500)})
+
 @RestController
 @RequestMapping(value = RouterUtil.ROOT)
 public class CustomerController {
@@ -57,6 +66,7 @@ public class CustomerController {
 		this.modelMapperDto = modelMapperDto;
 	}
 	
+	@ApiOperation(value = "Get a list with all customer ignoring the distributor", response = List.class)
 	@GetMapping(value = RouterUtil.CUSTOMERS, produces = RouterUtil.PRODUCES)
 	protected ResponseEntity<Object> findAll() {
 		
@@ -71,8 +81,9 @@ public class CustomerController {
 				HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Add a client and return the instance of DataTransferObject with same data object created", response = CustomerDto.class)
 	@PostMapping(value = RouterUtil.CUSTOMERS_ADD, produces = RouterUtil.PRODUCES)
-	protected ResponseEntity<Object> add(@Valid final @RequestBody AddCustomerRequest customerRequest, final BindingResult validator) {
+	protected ResponseEntity<Object> add(@Valid final @RequestBody AddCustomerRequest addCustomerRequest, final BindingResult validator) {
 		
 		/**
 		 * Validate the request data
@@ -85,12 +96,12 @@ public class CustomerController {
 		 * All users are created by default under the ENABLED status and under the distributorId = 1
 		 */
 		Customer customer = new Customer(
-				customerRequest.getName(), 
-				customerRequest.getLastName(), 
-				customerRequest.getUsername(), 
-				customerRequest.getPassword(), 
-				customerRequest.getEmail(), 
-				customerRequest.getAddress(), 
+				addCustomerRequest.getName(), 
+				addCustomerRequest.getLastName(), 
+				addCustomerRequest.getUsername(), 
+				addCustomerRequest.getPassword(), 
+				addCustomerRequest.getEmail(), 
+				addCustomerRequest.getAddress(), 
 				CustomerStatus.ENABLED, 
 				this.distributorService.findById(1L));
 		
@@ -103,8 +114,9 @@ public class CustomerController {
 				HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Update a client and return the instance of DataTransferObject with same data object updated", response = CustomerDto.class)
 	@PutMapping(value = RouterUtil.CUSTOMERS_UPDATE, produces = RouterUtil.PRODUCES)
-	protected ResponseEntity<Object> update(@Valid final @RequestBody UpdateCustomerRequest customerRequest, final BindingResult validator) {
+	protected ResponseEntity<Object> update(@Valid final @RequestBody UpdateCustomerRequest updateCustomerRequest, final BindingResult validator) {
 		
 		/**
 		 * Validate the request data
@@ -116,16 +128,16 @@ public class CustomerController {
 		/**
 		 * Get the current Customer for this customerId and set all new data for update
 		 */
-		Customer customer = this.customerService.findById(customerRequest.getId());
+		Customer customer = this.customerService.findById(updateCustomerRequest.getId());
 		
 		if(customer != null) {			
-			customer.setName(customerRequest.getName());
-			customer.setLastName(customerRequest.getLastName());
-			customer.setUsername(customerRequest.getUsername());
-			customer.setPassword(customerRequest.getPassword());
-			customer.setStatus(customerRequest.getCustomerStatus());
-			customer.setAddress(customerRequest.getAddress());
-			customer.setEmail(customerRequest.getEmail());
+			customer.setName(updateCustomerRequest.getName());
+			customer.setLastName(updateCustomerRequest.getLastName());
+			customer.setUsername(updateCustomerRequest.getUsername());
+			customer.setPassword(updateCustomerRequest.getPassword());
+			customer.setStatus(updateCustomerRequest.getCustomerStatus());
+			customer.setAddress(updateCustomerRequest.getAddress());
+			customer.setEmail(updateCustomerRequest.getEmail());
 			
 			customer = this.customerService.update(customer);
 			
@@ -137,10 +149,11 @@ public class CustomerController {
 		}
 		
 		return new ResponseEntity<Object>(
-				String.format(INVALID_CUSTOMERID, customerRequest.getId()),
+				String.format(INVALID_CUSTOMERID, updateCustomerRequest.getId()),
 				HttpStatus.BAD_REQUEST);
 	}
 	
+	@ApiOperation(value = "Delete a client and return the instance of DataTransferObject with same data object was deleted", response = CustomerDto.class)
 	@DeleteMapping(value = RouterUtil.CUSTOMERS_DELETE, produces = RouterUtil.PRODUCES)
 	protected ResponseEntity<Object> delete(final @PathVariable(name = "customerId", required = true) Long customerId) {
 		

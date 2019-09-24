@@ -21,10 +21,19 @@ import com.consultecti.customer.api.model.domain.CustomerStatus;
 import com.consultecti.customer.api.service.ICustomerService;
 import com.consultecti.customer.api.util.RouterUtil;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 /**
  * @author amelendez
  * @since Sep 24, 2019
  */
+@ApiResponses(value = {
+		@ApiResponse(code = 200, message = RouterUtil.HTTP_200),			
+		@ApiResponse(code = 400, message = RouterUtil.HTTP_400),
+		@ApiResponse(code = 500, message = RouterUtil.HTTP_500)})
+
 @RestController
 @RequestMapping(value = RouterUtil.ROOT)
 public class CustomerSearchController {
@@ -42,6 +51,7 @@ public class CustomerSearchController {
 		this.modelMapperDto = modelMapperDto;
 	}
 	
+	@ApiOperation(value = "Get a list with all customer by username ignoring the distributor", response = List.class)
 	@GetMapping(value = RouterUtil.CUSTOMERS_BY_USERNAME, produces = RouterUtil.PRODUCES)
 	protected ResponseEntity<Object> findByUsername(final @PathVariable(name = "username", required = true) String username) {
 		
@@ -56,6 +66,7 @@ public class CustomerSearchController {
 					HttpStatus.OK);
 	}
 	
+	@ApiOperation(value = "Get a list with all customer by status ignoring the distributor", response = List.class)
 	@GetMapping(value = RouterUtil.CUSTOMERS_BY_STATUS, produces = RouterUtil.PRODUCES)
 	protected ResponseEntity<Object> findByStatus(final @PathVariable(name = "status", required = true) String status) {
 		
