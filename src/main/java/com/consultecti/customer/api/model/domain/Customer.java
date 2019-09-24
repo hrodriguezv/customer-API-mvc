@@ -13,6 +13,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * @author amelendez
@@ -27,7 +29,7 @@ public class Customer implements Serializable {
 	private static final long serialVersionUID = 7817267989373431468L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
@@ -46,6 +48,10 @@ public class Customer implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	private CustomerStatus status;
+
+	@ManyToOne
+	@JoinColumn
+	private Distributor distributor;
 
 	/**
 	 * @param id
@@ -207,6 +213,20 @@ public class Customer implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(dateCreated, id);
+	}
+
+	/**
+	 * @return the distributor
+	 */
+	public Distributor getDistributor() {
+		return distributor;
+	}
+
+	/**
+	 * @param distributor the distributor to set
+	 */
+	public void setDistributor(Distributor distributor) {
+		this.distributor = distributor;
 	}
 
 	@Override

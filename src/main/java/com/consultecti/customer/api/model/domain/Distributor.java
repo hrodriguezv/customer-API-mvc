@@ -5,12 +5,16 @@ package com.consultecti.customer.api.model.domain;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * @author amelendez
@@ -25,7 +29,7 @@ public class Distributor implements Serializable {
 	private static final long serialVersionUID = 2905769615511801023L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String name;
@@ -35,6 +39,9 @@ public class Distributor implements Serializable {
 	private String address;
 
 	private ZonedDateTime dateCreated;
+
+	@OneToMany(mappedBy = "distributor", cascade = CascadeType.ALL)
+	private List<Customer> customers = new ArrayList<>();
 
 	/**
 	 * @param id
@@ -132,6 +139,20 @@ public class Distributor implements Serializable {
 	@Override
 	public int hashCode() {
 		return Objects.hash(dateCreated, id);
+	}
+
+	/**
+	 * @return the customers
+	 */
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+	/**
+	 * @param customers the customers to set
+	 */
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
 	}
 
 	@Override
