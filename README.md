@@ -35,7 +35,7 @@ Second! Compile and Run the project.
 Go to the project directory, the folder that was created when cloning the project.
 ##### Two steps to take:
 * 1 - We compile the application, create the executable and run the Test using: mvn clean compile install
-* 2 - Run the service by running the deliverable <customer-api.jar> that is in the target folder within the directory that we are already.: java -jar *.jar
+* 2 - Run the service by running the deliverable <customer-api.jar> that is in the target folder within the directory that we are already.: java -jar customer-api.jar
 ```sh
 $ cd dirctory-project-customer-api
 $ mvn clean compile install
@@ -44,8 +44,8 @@ $ java -jar customer-api.jar
 ```
 ### Use the Service !!
 ### SwaggerUI Documentation and Try it out!
-http://localhost:8080/swagger-ui.html
-http://localhost:8080/v2/api-docs
+* http://localhost:8080/swagger-ui.html
+* http://localhost:8080/v2/api-docs
 
 
 ##### Endpoints:
