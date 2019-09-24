@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +16,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author amelendez
@@ -32,22 +35,30 @@ public class Customer implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String name;
 
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 
+	@Column(nullable = false)
 	private String username;
 
+	@Column(nullable = false)
 	private String password;
 
+	@Column(nullable = false)
 	private String email;
 
+	@Column(nullable = false)
 	private String address;
-
-	private ZonedDateTime dateCreated;
 
 	@Enumerated(EnumType.STRING)
 	private CustomerStatus status;
+
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "date_created", nullable = false)
+	private ZonedDateTime dateCreated = ZonedDateTime.now();
 
 	@ManyToOne
 	@JoinColumn
@@ -61,11 +72,12 @@ public class Customer implements Serializable {
 	 * @param password
 	 * @param email
 	 * @param address
-	 * @param dateCreated
 	 * @param status
+	 * @param dateCreated
+	 * @param distributor
 	 */
 	public Customer(Long id, String name, String lastName, String username, String password, String email,
-			String address, ZonedDateTime dateCreated, CustomerStatus status) {
+			String address, CustomerStatus status, ZonedDateTime dateCreated, Distributor distributor) {
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
@@ -73,15 +85,16 @@ public class Customer implements Serializable {
 		this.password = password;
 		this.email = email;
 		this.address = address;
-		this.dateCreated = dateCreated;
 		this.status = status;
+		this.dateCreated = dateCreated;
+		this.distributor = distributor;
 	}
 
 	/**
 	 * 
 	 */
 	public Customer() {
-
+		
 	}
 
 	/**
@@ -183,20 +196,6 @@ public class Customer implements Serializable {
 	}
 
 	/**
-	 * @return the dateCreated
-	 */
-	public ZonedDateTime getDateCreated() {
-		return dateCreated;
-	}
-
-	/**
-	 * @param dateCreated the dateCreated to set
-	 */
-	public void setDateCreated(ZonedDateTime dateCreated) {
-		this.dateCreated = dateCreated;
-	}
-
-	/**
 	 * @return the status
 	 */
 	public CustomerStatus getStatus() {
@@ -210,9 +209,18 @@ public class Customer implements Serializable {
 		this.status = status;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(dateCreated, id);
+	/**
+	 * @return the dateCreated
+	 */
+	public ZonedDateTime getDateCreated() {
+		return dateCreated;
+	}
+
+	/**
+	 * @param dateCreated the dateCreated to set
+	 */
+	public void setDateCreated(ZonedDateTime dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 
 	/**

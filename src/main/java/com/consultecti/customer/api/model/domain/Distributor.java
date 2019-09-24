@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * @author amelendez
@@ -32,13 +35,18 @@ public class Distributor implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String name;
 
+	@Column(nullable = false)
 	private String email;
 
+	@Column(nullable = false)
 	private String address;
 
-	private ZonedDateTime dateCreated;
+	@Column(name = "date_created", nullable = false)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private ZonedDateTime dateCreated = ZonedDateTime.now();
 
 	@OneToMany(mappedBy = "distributor", cascade = CascadeType.ALL)
 	private List<Customer> customers = new ArrayList<>();

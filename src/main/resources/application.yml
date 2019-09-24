@@ -1,1 +1,16 @@
+spring:
+  #Enable the h2 console
+  h2:
+   console:
+    enabled: true  
 
+  #Setting the database datasource 
+  datasource:
+   url: jdbc:h2:mem:customer
+   username: consultec
+   password: 12consultec34
+   driverClassName: org.h2.Driver
+
+  #Setting the Dialect for h2
+  jpa:
+   database-platform: org.hibernate.dialect.H2Dialect
