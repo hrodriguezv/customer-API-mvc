@@ -26,3 +26,8 @@ logging:
       consultecti: DEBUG
   pattern:
     console: "%5p||Date: %d{yyyy-MM-dd HH:mm:ss}||Class: %c||Line: %L||%m%n"
+
+authentication:
+  username: consultecti
+  password: 09challenge19
+  role: ADMIN
