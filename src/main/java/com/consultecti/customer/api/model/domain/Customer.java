@@ -65,7 +65,6 @@ public class Customer implements Serializable {
 	private Distributor distributor;
 
 	/**
-	 * @param id
 	 * @param name
 	 * @param lastName
 	 * @param username
@@ -73,12 +72,10 @@ public class Customer implements Serializable {
 	 * @param email
 	 * @param address
 	 * @param status
-	 * @param dateCreated
 	 * @param distributor
 	 */
-	public Customer(Long id, String name, String lastName, String username, String password, String email,
-			String address, CustomerStatus status, ZonedDateTime dateCreated, Distributor distributor) {
-		this.id = id;
+	public Customer(String name, String lastName, String username, String password, String email,
+			String address, CustomerStatus status, Distributor distributor) {
 		this.name = name;
 		this.lastName = lastName;
 		this.username = username;
@@ -86,7 +83,6 @@ public class Customer implements Serializable {
 		this.email = email;
 		this.address = address;
 		this.status = status;
-		this.dateCreated = dateCreated;
 		this.distributor = distributor;
 	}
 

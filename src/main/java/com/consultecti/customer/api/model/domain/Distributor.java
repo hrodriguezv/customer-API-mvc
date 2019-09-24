@@ -12,6 +12,7 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,30 +49,25 @@ public class Distributor implements Serializable {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private ZonedDateTime dateCreated = ZonedDateTime.now();
 
-	@OneToMany(mappedBy = "distributor", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "distributor", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Customer> customers = new ArrayList<>();
 
 	/**
-	 * @param id
 	 * @param name
 	 * @param email
 	 * @param address
-	 * @param dateCreated
 	 */
-	public Distributor(Long id, String name, String email, String address, ZonedDateTime dateCreated) {
-		super();
-		this.id = id;
+	public Distributor(String name, String email, String address) {;
 		this.name = name;
 		this.email = email;
 		this.address = address;
-		this.dateCreated = dateCreated;
 	}
 
 	/**
 	 * 
 	 */
 	public Distributor() {
-		super();
+		
 	}
 
 	/**

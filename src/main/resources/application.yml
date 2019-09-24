@@ -2,7 +2,7 @@ spring:
   #Enable the h2 console
   h2:
    console:
-    enabled: true  
+    enabled: true
 
   #Setting the database datasource 
   datasource:
@@ -14,3 +14,4 @@ spring:
   #Setting the Dialect for h2
   jpa:
    database-platform: org.hibernate.dialect.H2Dialect
+   show-sql: true
