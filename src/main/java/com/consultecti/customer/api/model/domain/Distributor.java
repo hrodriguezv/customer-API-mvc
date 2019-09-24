@@ -171,7 +171,7 @@ public class Distributor implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Distributor [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address
+		return "Distributor [name=" + name + ", email=" + email + ", address=" + address
 				+ ", dateCreated=" + dateCreated + "]";
 	}
 }
