@@ -29,7 +29,7 @@ This service was developed for the Java platform using the Spring framework as s
 * Maven
 
 First! Download the project
-git clone git clone https://aemelendezf@bitbucket.org/aemelendezf/customer-api.git
+git clone
 
 Second! Compile and Run the project.
 Go to the project directory, the folder that was created when cloning the project.
