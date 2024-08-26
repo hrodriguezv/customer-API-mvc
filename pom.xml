@@ -31,7 +31,7 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<model.mapper.version>2.3.5</model.mapper.version>
-		<swagger.spring-fox.version>2.9.2</swagger.spring-fox.version>
+		<swagger.spring-fox.version>2.10.0</swagger.spring-fox.version>
 	</properties>
 
 	<dependencies>
